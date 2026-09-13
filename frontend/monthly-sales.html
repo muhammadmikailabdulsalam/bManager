@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>bManager - Monthly Sales</title>
+
+    <!-- Main bManager styling -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <!-- Monthly report styling -->
+    <link
+        rel="stylesheet"
+        href="css/monthly-sales.css"
+    >
+</head>
+
+<body>
+
+<header class="top-bar">
+
+    <div class="brand">
+
+        <img
+            src="assets/logo.png"
+            alt="bManager logo"
+            class="brand-logo"
+        >
+
+        <div class="brand-text">
+
+            <h1>bManager</h1>
+
+            <p>Monthly Sales Report</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            type="button"
+            class="secondary-btn"
+            onclick="location.href='index.html'"
+        >
+            ← Home
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="inventory-container">
+
+    <!-- PAGE HEADING -->
+
+    <section class="page-heading">
+
+        <div>
+
+            <h2>Monthly Sales</h2>
+
+            <p>
+                Select a month to view the automatic sales report.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MONTH SELECTOR -->
+
+    <section class="sales-date-card">
+
+        <label for="salesMonth">
+            Select month
+        </label>
+
+        <input
+            type="month"
+            id="salesMonth"
+        >
+
+        <button
+            type="button"
+            class="primary-btn"
+            id="viewReportBtn"
+        >
+            View Report
+        </button>
+
+    </section>
+
+
+    <!-- REPORT -->
+
+    <section
+        class="inventory-section"
+        id="salesReport"
+    >
+
+        <div class="section-header">
+
+            <div>
+
+                <h3 id="reportTitle">
+                    Monthly Sales Report
+                </h3>
+
+                <p id="reportDate">
+                    Select a month to continue.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div
+            class="monthly-summary"
+            id="monthlySummary"
+            style="display:none;"
+        >
+
+            <div class="summary-card">
+
+                <span class="summary-label">
+                    Total Quantity Sold
+                </span>
+
+                <strong id="totalQuantitySold">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-label">
+                    Total Sales Value
+                </span>
+
+                <strong id="totalSalesValue">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+            class="sales-empty"
+            id="salesEmpty"
+        >
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <h3>
+                No report selected
+            </h3>
+
+            <p>
+                Choose a month above to view the monthly sales report.
+            </p>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div
+            class="table-wrapper"
+            id="salesTableWrapper"
+            style="display:none;"
+        >
+
+            <table id="salesTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Quantity Sold
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="salesTableBody"
+                ></tbody>
+
+
+                <tfoot>
+
+                    <tr>
+
+                        <td colspan="2">
+                            TOTAL
+                        </td>
+
+                        <td id="salesQuantityTotal">
+                            0
+                        </td>
+
+                        <td>
+                            —
+                        </td>
+
+                        <td id="salesValueTotal">
+                            ₦0.00
+                        </td>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Security/session controller -->
+<script src="js/app.js"></script>
+
+<!-- Monthly sales report -->
+<script src="js/monthly-sales.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+/* =========================================================
+   bMANAGER - DAILY SALES
+   ========================================================= */
+
+
+.sales-date-card {
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    margin-bottom: 24px;
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.30);
+
+}
+
+
+.sales-date-card label {
+
+    display: block;
+
+    color: #a3b393;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+
+}
+
+
+.sales-date-card input {
+
+    height: 44px;
+
+    padding: 0 12px;
+
+    border-radius: 10px;
+
+    border: 1px solid #3a4830;
+
+    background: #283420;
+
+    color: #eef1e6;
+
+    outline: none;
+
+}
+
+
+.sales-date-card input:focus {
+
+    border-color: #c2a24d;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(194, 162, 77, 0.18);
+
+}
+
+
+.sales-empty {
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+}
+
+
+.sales-empty h3 {
+
+    margin-bottom: 6px;
+
+}
+
+
+.sales-empty p {
+
+    color: #a3b393;
+
+}
+
+
+#salesTable {
+
+    width: 100%;
+
+    min-width: 650px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    background: #212b1c;
+
+}
+
+
+#salesTable thead th {
+
+    background: #283420;
+
+    color: #e8ecdf;
+
+    padding: 15px 14px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    border-bottom: 1px solid #3a4830;
+
+    border-right: 1px solid #37452e;
+
+}
+
+
+#salesTable thead th:last-child {
+
+    border-right: none;
+
+}
+
+
+#salesTable tbody td {
+
+    padding: 17px 14px;
+
+    border-bottom: 1px solid #37452e;
+
+    border-right: 1px solid #37452e;
+
+    color: #e8ecdf;
+
+    font-size: 14px;
+
+}
+
+
+#salesTable tbody td:last-child {
+
+    border-right: none;
+
+}
+
+
+#salesTable tfoot td {
+
+    background: #283420;
+
+    padding: 15px 14px;
+
+    border-top: 2px solid #3c4b32;
+
+    font-weight: 800;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sales-date-card {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+    .sales-date-card input,
+    .sales-date-card button {
+
+        width: 100%;
+
+    }
+
+}

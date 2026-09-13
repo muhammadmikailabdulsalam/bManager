@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>bManager - Daily Inventory</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .entry-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        .entry-table th,
+        .entry-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .entry-table input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .entry-row-total {
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .add-row-btn {
+            margin-top: 14px;
+        }
+
+        .remove-row-btn {
+            border: 0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .remove-row-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="top-bar">
+
+        <div class="brand">
+
+            <!-- bManager Logo -->
+            <img
+                src="assets/logo.png"
+                alt="bManager Logo"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+                <h1>bManager</h1>
+                <p>Business Management</p>
+            </div>
+
+        </div>
+
+
+        <!-- Header actions -->
+        <div class="header-actions">
+
+            <button
+                id="newOrderBtn"
+                class="primary-btn">
+                + New Order
+            </button>
+
+            <button
+                id="remainingBtn"
+                class="secondary-btn">
+                + Remaining Stock
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="inventory-container">
+
+
+        <!-- =================================================
+             PAGE TITLE
+        ================================================== -->
+
+        <section class="page-heading">
+
+            <div>
+
+                <h2>Daily Inventory</h2>
+
+                <p>
+                    Track your new orders, remaining stock,
+                    and daily inventory value.
+                </p>
+
+            </div>
+
+
+            <!-- Automatically generated date -->
+
+            <div class="date-display">
+
+                <span>Inventory Date</span>
+
+                <strong id="currentDate">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DATE NAVIGATION
+        ================================================== -->
+
+        <section class="date-selector">
+
+            <button
+                id="previousDateBtn"
+                class="date-nav-btn">
+                ←
+            </button>
+
+
+            <div class="selected-date">
+
+                <span>Selected Date</span>
+
+                <strong id="selectedDate">
+                    Today
+                </strong>
+
+            </div>
+
+
+            <button
+                id="nextDateBtn"
+                class="date-nav-btn">
+                →
+            </button>
+
+        </section>
+<!-- =================================================
+             INVENTORY TABLE SECTION
+        ================================================== -->
+
+        <section class="inventory-section">
+
+
+            <!-- Table heading -->
+
+            <div class="section-header">
+
+                <div>
+
+                    <h3>Inventory</h3>
+
+                    <p>
+                        Opening stock + new order = current inventory
+                    </p>
+
+                </div>
+
+
+                <!-- Search -->
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        id="productSearch"
+                        placeholder="Search products..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INVENTORY TABLE
+            ================================================== -->
+
+            <div class="table-wrapper">
+
+                <table id="inventoryTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Product</th>
+
+                            <th>Opening</th>
+
+                            <th>New Order</th>
+
+                            <th>Current Inventory</th>
+
+                            <th>Price</th>
+
+                            <th>Total Value</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="inventoryTableBody">
+
+                        <!--
+                            JavaScript will generate
+                            inventory rows here.
+
+                            Example:
+
+                            # | Product | Remaining |
+                            New Order | Total | Price |
+                            Total Value
+                        -->
+
+                    </tbody>
+
+
+                    <!-- =================================================
+                         TABLE FOOTER
+                    ================================================== -->
+
+                    <tfoot>
+
+                        <tr>
+
+                            <td colspan="2">
+                                <strong>Daily Total</strong>
+                            </td>
+
+                            <td id="tableRemainingTotal">
+                                0
+                            </td>
+
+                            <td id="tableNewOrderTotal">
+                                0
+                            </td>
+
+                            <td id="tableProductTotal">
+                                0
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td id="tableValueTotal">
+                                ₦0
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+
+            <!-- Empty state -->
+
+            <div
+                id="emptyInventory"
+                class="empty-state">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h3>No inventory recorded</h3>
+
+                <p>
+                    Add a new order or record your
+                    remaining stock to begin.
+                </p>
+
+                <div class="empty-actions">
+
+                    <button
+                        id="emptyNewOrderBtn"
+                        class="primary-btn">
+                        + New Order
+                    </button>
+
+                    <button
+                        id="emptyRemainingBtn"
+                        class="secondary-btn">
+                        + Remaining Stock
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- =================================================
+             DAILY SUMMARY
+             Moved below the inventory table
+        ================================================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card remaining-card">
+                <div class="summary-icon">📦</div>
+                <div class="summary-content">
+                    <span>Remaining Stock Value</span>
+                    <strong id="remainingTotalValue">₦0</strong>
+                </div>
+            </div>
+
+            <div class="summary-card order-card">
+                <div class="summary-icon">🛒</div>
+                <div class="summary-content">
+                    <span>New Orders Value</span>
+                    <strong id="newOrderTotalValue">₦0</strong>
+                </div>
+            </div>
+
+            <div class="summary-card total-card">
+                <div class="summary-icon">📊</div>
+                <div class="summary-content">
+                    <span>Total Inventory Value</span>
+                    <strong id="dailyTotalValue">₦0</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =================================================
+             INFORMATION SECTION
+        ================================================== -->
+
+        <section class="inventory-info">
+
+            <div class="info-box">
+
+                <strong>How Daily Inventory Works</strong>
+
+                <p>
+                    Opening stock represents yesterday's remaining products
+                    carried into the selected day.
+                    New Order represents products received
+                    on the selected date. Today's remaining stock is
+                    the closing stock and becomes tomorrow's opening.
+                </p>
+
+                <p>
+                    Total inventory is calculated
+                    automatically:
+                </p>
+
+                <div class="formula">
+
+                    Yesterday's Remaining + Today's New Order = Current Inventory
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         NEW ORDER MODAL
+         
+         IMPORTANT:
+         User enters ONLY:
+         1. Product
+         2. Quantity
+         3. Price
+         
+         Date is automatic.
+    ====================================================== -->
+
+    <div
+        id="newOrderModal"
+        class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <h3>New Orders</h3>
+                    <p>Add multiple products received today.</p>
+                </div>
+
+                <button
+                    id="closeNewOrderBtn"
+                    class="close-btn"
+                    type="button">
+                    ×
+                </button>
+            </div>
+
+            <div class="automatic-date">
+                <span>Order Date</span>
+                <strong id="newOrderDate">Today</strong>
+            </div>
+
+            <form id="newOrderForm">
+
+                <div class="table-wrapper">
+                    <table class="entry-table" id="newOrderEntryTable">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price / Unit</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="newOrderRows">
+                            <tr class="order-entry-row">
+                                <td>
+                                    <input
+                                        type="text"
+                                        id="orderProduct"
+                                        name="product"
+                                        placeholder="Product"
+                                        required>
+                                </td>
+
+                                <td>
+                                    <input
+                                        type="number"
+                                        id="orderQuantity"
+                                        name="quantity"
+                                        placeholder="Qty"
+                                        min="1"
+                                        required>
+                                </td>
+
+                                <td>
+                                    <input
+                                        type="number"
+                                        id="orderPrice"
+                                        name="price"
+                                        placeholder="₦"
+                                        min="0"
+                                        step="0.01"
+                                        required>
+                                </td>
+
+                                <td class="entry-row-total" id="orderRowTotal">
+                                    ₦0
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="remove-row-btn"
+                                        disabled>
+                                        ×
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Orders Total</strong>
+                                </td>
+                                <td id="newOrderEntryTotal">₦0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <button
+                    type="button"
+                    id="addOrderRowBtn"
+                    class="secondary-btn add-row-btn">
+                    + Add Product
+                </button>
+
+                <div class="form-actions">
+                    <button
+                        type="button"
+                        id="cancelNewOrderBtn"
+                        class="cancel-btn">
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+                        Save All Orders
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         REMAINING STOCK MODAL
+         
+         User enters ONLY:
+         1. Product
+         2. Quantity
+         
+         Date is automatic.
+         
+         Price will be obtained from the existing
+         product information.
+    ====================================================== -->
+
+    <div
+        id="remainingModal"
+        class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <h3>Remaining Stock</h3>
+                    <p>Add multiple remaining-stock products at once.</p>
+                </div>
+
+                <button
+                    id="closeRemainingBtn"
+                    class="close-btn"
+                    type="button">
+                    ×
+                </button>
+            </div>
+
+            <div class="automatic-date">
+                <span>Record Date</span>
+                <strong id="remainingDate">Today</strong>
+            </div>
+
+            <form id="remainingForm">
+
+                <div class="table-wrapper">
+                    <table class="entry-table" id="remainingEntryTable">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price / Unit</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="remainingRows">
+                            <tr class="remaining-entry-row">
+                                <td>
+                                    <input
+                                        type="text"
+                                        id="remainingProduct"
+                                        name="product"
+                                        placeholder="Product"
+                                        required>
+                                </td>
+
+                                <td>
+                                    <input
+                                        type="number"
+                                        id="remainingQuantity"
+                                        name="quantity"
+                                        placeholder="Qty"
+                                        min="0"
+                                        required>
+                                </td>
+
+                                <td>
+                                    <input
+                                        type="number"
+                                        class="remaining-price"
+                                        name="price"
+                                        placeholder="₦"
+                                        min="0"
+                                        step="0.01">
+                                </td>
+
+                                <td class="entry-row-total" id="remainingRowTotal">
+                                    ₦0
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="remove-row-btn"
+                                        disabled>
+                                        ×
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Stock Total</strong>
+                                </td>
+                                <td id="remainingEntryTotal">₦0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <button
+                    type="button"
+                    id="addRemainingRowBtn"
+                    class="secondary-btn add-row-btn">
+                    + Add Product
+                </button>
+
+                <div class="form-actions">
+                    <button
+                        type="button"
+                        id="cancelRemainingBtn"
+                        class="cancel-btn">
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="secondary-btn">
+                        Save All Stock
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         EDIT PRODUCT MODAL
+    ====================================================== -->
+
+    <div id="editProductModal" class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <h3>Edit Product</h3>
+                    <p>Update the product, today's quantities, or price.</p>
+                </div>
+
+                <button id="closeEditProductBtn" class="close-btn" type="button">×</button>
+            </div>
+
+            <form id="editProductForm">
+                <input type="hidden" id="editProductId">
+
+                <label for="editProductName">Product Name</label>
+                <input id="editProductName" type="text" required>
+
+                <label for="editProductRemaining">Remaining Stock</label>
+                <input id="editProductRemaining" type="number" min="0" step="0.01" required>
+
+                <label for="editProductNewOrder">New Order</label>
+                <input id="editProductNewOrder" type="number" min="0" step="0.01" required>
+
+                <label for="editProductPrice">Price / Unit</label>
+                <input id="editProductPrice" type="number" min="0" step="0.01" required>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelEditProductBtn" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="primary-btn">Save Changes</button>
+                </div>
+
+                <button type="button" id="deleteProductBtn" class="cancel-btn" style="width:100%; margin-top:12px; border:1px solid #dc2626; color:#dc2626;">
+                    🗑️ Delete Product
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         CONFIRMATION / MESSAGE AREA
+    ====================================================== -->
+
+    <div
+        id="messageBox"
+        class="message-box hidden">
+
+        <span id="messageText"></span>
+
+        <button
+            id="closeMessageBtn">
+            ×
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+
+            <img
+                src="assets/logo.png"
+                alt="bManager"
+            >
+
+            <span>
+                bManager
+            </span>
+
+        </div>
+
+        <p>
+            Smart Business Management
+        </p>
+
+        <p class="copyright">
+            © 2026 bManager. All rights reserved.
+        </p>
+
+    </footer>
+
+    <script src="js/app.js"></script>
+<script src="js/inventory.js"></script>
+
+</body>
+
+</html>

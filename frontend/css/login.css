@@ -1,0 +1,237 @@
+/* =========================================
+   bManager Login Page
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: #f5f7fb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 16px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.logo p {
+    color: #777;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+
+    border: 1px solid #d7dce5;
+    border-radius: 9px;
+
+    font-size: 15px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #333;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #111;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 11px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    display: none;
+}
+
+.message.error {
+    display: block;
+    background: #ffe9e9;
+    color: #b00020;
+}
+
+.message.success {
+    display: block;
+    background: #e9f8ee;
+    color: #176b35;
+}
+
+.google-btn {
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+
+    border: 1px solid #d7dce5;
+    border-radius: 9px;
+
+    background: white;
+    color: #222;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.google-btn:hover {
+    background: #f7f7f7;
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 20px;
+
+    color: #888;
+    font-size: 12px;
+}
+/* Password field with show/hide control */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 48px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    background: #f0f2f5;
+}
+
+.auth-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0 12px;
+    color: #999;
+    font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    height: 1px;
+    background: #e1e4e9;
+    flex: 1;
+}
+
+.google-button-container {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 18px;
+    color: #666;
+    font-size: 14px;
+}
+
+.auth-switch a {
+    color: #111;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.google-unavailable {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e1e4e9;
+    border-radius: 9px;
+    color: #777;
+    text-align: center;
+    font-size: 13px;
+}

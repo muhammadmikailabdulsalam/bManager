@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bManager - Profit Center</title>
+<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/profit.css?v=4">
+</head>
+<body>
+<header class="top-bar">
+<div class="brand">
+<img src="assets/logo.png" alt="bManager logo" class="brand-logo">
+<div class="brand-text"><h1>bManager</h1><p>Profit Center</p></div>
+</div>
+<div class="header-actions">
+<button type="button" class="secondary-btn" id="homeBtn">← Home</button>
+</div>
+</header>
+<main class="inventory-container profit-container">
+<section class="page-heading">
+<div><h2>Profit Center</h2><p id="pageDescription">Enter the unit cost for each product sold in the selected period, then continue to the profit report.</p></div>
+</section>
+<section class="profit-controls">
+<div class="profit-type-buttons">
+<button type="button" id="dailyBtn" class="profit-type-btn active">Daily</button>
+<button type="button" id="monthlyBtn" class="profit-type-btn">Monthly</button>
+</div>
+<div class="profit-period-control" id="dailyControl">
+<label for="dailyPeriod">Select date</label>
+<input type="date" id="dailyPeriod">
+</div>
+<div class="profit-period-control hidden" id="monthlyControl">
+<label for="monthlyPeriod">Select month</label>
+<input type="month" id="monthlyPeriod">
+</div>
+</section>
+
+<section class="inventory-section" id="actualValueStep">
+<div class="section-header"><div>
+<h3 id="actualValueTitle">Enter Unit Costs</h3>
+<p id="actualValueSubtitle">Enter the actual value (unit cost) for each product sold in the selected period.</p>
+</div></div>
+<div class="table-wrapper profit-table-wrapper">
+<table id="actualValueTable">
+<thead><tr><th>#</th><th>Product</th><th>Actual Value</th></tr></thead>
+<tbody id="actualValueTableBody"></tbody>
+</table>
+</div>
+<div class="profit-next-area">
+<button type="button" class="primary-btn" id="nextBtn">Next →</button>
+</div>
+</section>
+
+<section class="inventory-section hidden" id="profitStep">
+<div class="section-header"><div>
+<h3 id="profitReportTitle">Profit Report</h3>
+<p id="profitReportSubtitle">Profit calculation</p>
+</div>
+<button type="button" class="secondary-btn" id="backBtn">← Back</button>
+</div>
+<div class="summary-grid">
+<div class="summary-card"><span>Sales Value</span><strong id="totalSalesValue">₦0.00</strong></div>
+<div class="summary-card"><span>Total Cost</span><strong id="totalCost">₦0.00</strong></div>
+<div class="summary-card"><span>Net Profit</span><strong id="totalProfit">₦0.00</strong></div>
+</div>
+<div class="table-wrapper profit-table-wrapper">
+<table id="profitTable">
+<thead><tr><th>#</th><th>Product</th><th>Sold</th><th>Sales Value</th><th>Total Cost</th><th>Profit</th></tr></thead>
+<tbody id="profitTableBody"></tbody>
+<tfoot><tr><td></td><td><strong>TOTAL</strong></td><td></td><td id="tableSalesTotal">₦0.00</td><td id="tableCostTotal">₦0.00</td><td id="tableProfitTotal">₦0.00</td></tr></tfoot>
+</table>
+</div>
+</section>
+<div id="profitMessage" class="profit-message hidden" role="status" aria-live="polite"></div>
+</main>
+<script src="js/app.js?v=4"></script>
+<script src="js/profit-center.js?v=5"></script>
+</body>
+</html>

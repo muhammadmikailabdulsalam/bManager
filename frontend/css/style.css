@@ -1,0 +1,1742 @@
+/* =========================================================
+   bMANAGER - DAILY INVENTORY
+   Main Stylesheet
+   ========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background: #161f13;
+    color: #eef1e6;
+
+    min-height: 100vh;
+
+    line-height: 1.5;
+}
+
+
+/* Remove default button/input font differences */
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================================================
+   2. HEADER
+   ========================================================= */
+
+.top-bar {
+
+    background: #212b1c;
+
+    border-bottom: 1px solid #3a4a30;
+
+    min-height: 78px;
+
+    padding: 14px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* Brand */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+
+.brand-logo {
+
+    width: 48px;
+
+    height: 48px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+.brand-text h1 {
+
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+.brand-text p {
+
+    color: #8b9c78;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+/* Header buttons */
+
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   3. BUTTONS
+   ========================================================= */
+
+.primary-btn,
+.secondary-btn,
+.cancel-btn {
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 11px 16px;
+
+    min-height: 44px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+     background:rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    backdrop-filter: blur(15px);
+}
+
+
+.primary-btn {
+
+    background: #c2a24d;
+
+    color: #1a2117;
+
+    box-shadow: 0 4px 12px rgba(194, 162, 77, 0.25);
+}
+
+
+.primary-btn:hover {
+
+    box-shadow: 0 6px 16px rgba(194, 162, 77, 0.35);
+}
+
+
+.secondary-btn {
+
+    background: #212b1c;
+
+    color: #c2a24d;
+
+    border: 1px solid #c2a24d;
+}
+
+
+.secondary-btn:hover {
+
+    background: #33402a;
+}
+
+
+.cancel-btn {
+
+    background: #2c3924;
+
+    color: #c7d0ba;
+}
+
+
+.cancel-btn:hover {
+
+    background: #333f2b;
+}
+
+
+.primary-btn:active,
+.secondary-btn:active,
+.cancel-btn:active {
+
+    transform: scale(0.97);
+}
+
+
+button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   4. MAIN CONTAINER
+   ========================================================= */
+
+.inventory-container {
+
+    width: min(1400px, calc(100% - 32px));
+
+    margin: 0 auto;
+
+    padding: 30px 0 50px;
+}
+
+
+/* =========================================================
+   5. PAGE HEADING
+   ========================================================= */
+
+.page-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+
+.page-heading h2 {
+
+    font-size: 32px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+}
+
+
+.page-heading p {
+
+    color: #8b9c78;
+
+    margin-top: 8px;
+
+    max-width: 650px;
+}
+
+
+/* Automatic date */
+
+.date-display {
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 12px;
+
+    padding: 10px 16px;
+
+    min-width: 150px;
+
+    text-align: right;
+}
+
+
+.date-display span {
+
+    display: block;
+
+    color: #a3b393;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.date-display strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   6. DATE SELECTOR
+   ========================================================= */
+
+.date-selector {
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 14px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.30);
+}
+
+
+.date-nav-btn {
+
+    width: 44px;
+
+    height: 44px;
+
+    border: 1px solid #3c4b32;
+
+    background: #283420;
+
+    color: #eef1e6;
+
+    border-radius: 10px;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.date-nav-btn:hover {
+
+    background: #33402a;
+
+    border-color: #c2a24d;
+
+    color: #c2a24d;
+}
+
+
+.selected-date {
+
+    text-align: center;
+
+    flex: 1;
+}
+
+
+.selected-date span {
+
+    display: block;
+
+    color: #a3b393;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.selected-date strong {
+
+    display: block;
+
+    font-size: 16px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   7. SUMMARY CARDS
+   ========================================================= */
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 28px;
+}
+
+
+.summary-card {
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 112px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.30);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.summary-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.42);
+}
+
+
+.summary-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+    background: #2c3924;
+
+    flex-shrink: 0;
+}
+
+
+.summary-content {
+
+    min-width: 0;
+}
+
+
+.summary-content span {
+
+    display: block;
+
+    color: #8b9c78;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+
+.summary-content strong {
+
+    display: block;
+
+    font-size: 22px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   8. INVENTORY SECTION
+   ========================================================= */
+
+.inventory-section {
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.30);
+}
+
+
+/* Section heading */
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.section-header h3 {
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.section-header p {
+
+    color: #a3b393;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+/* Search */
+
+.search-box {
+
+    width: 280px;
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    height: 44px;
+
+    border: 1px solid #3a4830;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    padding: 0 14px;
+
+    background: #212b1c;
+
+    color: #eef1e6;
+
+    transition: 0.2s ease;
+}
+
+
+.search-box input::placeholder {
+
+    color: #75846a;
+}
+
+
+.search-box input:focus {
+
+    border-color: #c2a24d;
+
+    box-shadow:
+        0 0 0 3px rgba(194, 162, 77, 0.18);
+}
+
+
+/* =========================================================
+   9. TABLE
+   ========================================================= */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #384630;
+
+    border-radius: 12px;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Table */
+
+#inventoryTable {
+
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    background: #212b1c;
+}
+
+
+/* Table header */
+
+#inventoryTable thead th {
+
+    background: #283420;
+
+    color: #e8ecdf;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+
+    padding: 15px 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #3a4830;
+
+    /* VERTICAL SEPARATION */
+
+    border-right: 1px solid #37452e;
+}
+
+
+#inventoryTable thead th:last-child {
+
+    border-right: none;
+}
+
+
+/* Table body */
+
+#inventoryTable tbody td {
+
+    padding: 17px 14px;
+
+    border-bottom: 1px solid #37452e;
+
+    /* VERTICAL SEPARATION */
+
+    border-right: 1px solid #37452e;
+
+    font-size: 14px;
+
+    color: #e8ecdf;
+
+    white-space: nowrap;
+}
+
+
+#inventoryTable tbody td:last-child {
+
+    border-right: none;
+}
+
+
+/* Hover */
+
+#inventoryTable tbody tr {
+
+    transition: background 0.15s ease;
+}
+
+
+#inventoryTable tbody tr:hover {
+
+    background: #2a3722;
+}
+
+
+/* First column */
+
+#inventoryTable tbody td:first-child {
+
+    color: #a3b393;
+
+    font-weight: 700;
+}
+
+
+/* Product name */
+
+#inventoryTable tbody td:nth-child(2) {
+
+    font-weight: 700;
+}
+
+
+/* Numeric values */
+
+#inventoryTable tbody td:nth-child(3),
+#inventoryTable tbody td:nth-child(4),
+#inventoryTable tbody td:nth-child(5) {
+
+    text-align: center;
+}
+
+
+/* Price */
+
+#inventoryTable tbody td:nth-child(6) {
+
+    font-weight: 600;
+}
+
+
+/* Total value */
+
+#inventoryTable tbody td:nth-child(7) {
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   10. TABLE FOOTER
+   ========================================================= */
+
+#inventoryTable tfoot td {
+
+    background: #283420;
+
+    padding: 15px 14px;
+
+    border-top: 2px solid #3c4b32;
+
+    border-right: 1px solid #37452e;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+#inventoryTable tfoot td:last-child {
+
+    border-right: none;
+}
+
+
+#inventoryTable tfoot td:nth-child(3),
+#inventoryTable tfoot td:nth-child(4),
+#inventoryTable tfoot td:nth-child(5) {
+
+    text-align: center;
+}
+
+
+#inventoryTable tfoot td:last-child {
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   11. EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+
+    display: none;
+
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+
+.empty-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+}
+
+
+.empty-state h3 {
+
+    font-size: 20px;
+
+    margin-bottom: 6px;
+}
+
+
+.empty-state p {
+
+    color: #a3b393;
+
+    max-width: 420px;
+
+    margin: 0 auto 20px;
+}
+
+
+.empty-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   12. INFORMATION BOX
+   ========================================================= */
+
+.inventory-info {
+
+    margin-top: 24px;
+}
+
+
+.info-box {
+
+    background: #26311f;
+
+    border: 1px solid #4a5a3c;
+
+    border-radius: 14px;
+
+    padding: 20px;
+}
+
+
+.info-box strong {
+
+    display: block;
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+}
+
+
+.info-box p {
+
+    color: #8b9c78;
+
+    font-size: 14px;
+
+    margin-top: 7px;
+}
+
+
+.formula {
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 10px 14px;
+
+    background: #212b1c;
+
+    border: 1px solid #4a5a3c;
+
+    border-radius: 8px;
+
+    font-weight: 800;
+
+    color: #c2a24d;
+}
+
+
+/* =========================================================
+   13. MODAL
+   ========================================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.modal.hidden {
+
+    display: none;
+}
+
+
+/* Dark background */
+
+.modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(5, 8, 4, 0.65);
+
+    backdrop-filter: blur(3px);
+}
+
+
+/* Modal box */
+
+.modal-box {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(500px, 100%);
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    background: #212b1c;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    animation: modalIn 0.18s ease-out;
+}
+
+
+@keyframes modalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px) scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+}
+
+
+/* Modal header */
+
+.modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.modal-header h3 {
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+.modal-header p {
+
+    color: #a3b393;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* Close */
+
+.close-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #2c3924;
+
+    color: #c7d0ba;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.close-btn:hover {
+
+    background: #333f2b;
+}
+
+
+/* =========================================================
+   14. AUTOMATIC DATE
+   ========================================================= */
+
+.automatic-date {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #283420;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 10px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 20px;
+}
+
+
+.automatic-date span {
+
+    color: #8b9c78;
+
+    font-size: 13px;
+}
+
+
+.automatic-date strong {
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   15. FORMS
+   ========================================================= */
+
+.form-group {
+
+    margin-bottom: 17px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #dfe6d2;
+
+    margin-bottom: 7px;
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #3a4830;
+
+    border-radius: 10px;
+
+    background: #212b1c;
+
+    color: #eef1e6;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.form-group input::placeholder {
+
+    color: #75846a;
+}
+
+
+.form-group input:focus {
+
+    border-color: #c2a24d;
+
+    box-shadow:
+        0 0 0 3px rgba(194, 162, 77, 0.18);
+}
+
+
+/* Form buttons */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 6px;
+}
+
+
+/* =========================================================
+   16. MESSAGE BOX
+   ========================================================= */
+
+.message-box {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    z-index: 2000;
+
+    max-width: min(420px, calc(100% - 40px));
+
+    background: #10150c;
+
+    color: #eef1e6;
+
+    border-radius: 12px;
+
+    padding: 13px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+
+    animation: messageIn 0.2s ease-out;
+}
+
+
+.message-box.hidden {
+
+    display: none;
+}
+
+
+#messageText {
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+#closeMessageBtn {
+
+    border: none;
+
+    background: transparent;
+
+    color: #eef1e6;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+
+@keyframes messageIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+}
+
+
+/* =========================================================
+   17. FOOTER
+   ========================================================= */
+
+.footer {
+
+    background: #212b1c;
+
+    border-top: 1px solid #3a4a30;
+
+    text-align: center;
+
+    padding: 28px 20px;
+
+    color: #8b9c78;
+}
+
+
+.footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 7px;
+}
+
+
+.footer-brand img {
+
+    width: 30px;
+
+    height: 30px;
+
+    object-fit: contain;
+}
+
+
+.footer-brand span {
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #eef1e6;
+}
+
+
+.footer p {
+
+    font-size: 13px;
+}
+
+
+.footer .copyright {
+
+    margin-top: 8px;
+
+    color: #75846a;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   18. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .summary-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .summary-card.total-card {
+
+        grid-column: 1 / -1;
+    }
+
+
+    .page-heading {
+
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   19. MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+    .top-bar {
+
+        padding: 12px 14px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .brand {
+
+        width: 100%;
+    }
+
+
+    .header-actions {
+
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .header-actions button {
+
+        width: 100%;
+
+        padding-left: 8px;
+
+        padding-right: 8px;
+
+        font-size: 13px;
+    }
+
+
+    .inventory-container {
+
+        width: min(100% - 20px, 1400px);
+
+        padding-top: 22px;
+    }
+
+
+    .page-heading {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
+
+    .page-heading h2 {
+
+        font-size: 28px;
+    }
+
+
+    .date-display {
+
+        text-align: left;
+
+        width: 100%;
+    }
+
+
+    .summary-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .summary-card.total-card {
+
+        grid-column: auto;
+    }
+
+
+    .summary-card {
+
+        min-height: 96px;
+
+        padding: 16px;
+    }
+
+
+    .summary-content strong {
+
+        font-size: 20px;
+    }
+
+
+    .inventory-section {
+
+        padding: 14px;
+
+        border-radius: 13px;
+    }
+
+
+    .section-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 13px;
+    }
+
+
+    .search-box {
+
+        width: 100%;
+    }
+
+
+    .table-wrapper {
+
+        border-radius: 10px;
+    }
+
+
+    .modal {
+
+        align-items: flex-end;
+
+        padding: 0;
+    }
+
+
+    .modal-box {
+
+        width: 100%;
+
+        max-height: 90vh;
+
+        border-radius: 20px 20px 0 0;
+
+        padding: 20px;
+
+    }
+
+
+    .form-actions {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .form-actions button {
+
+        width: 100%;
+    }
+
+
+    .message-box {
+
+        left: 10px;
+
+        right: 10px;
+
+        bottom: 10px;
+
+        max-width: none;
+    }
+
+}
+
+
+/* =========================================================
+   20. SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .brand-logo {
+
+        width: 42px;
+
+        height: 42px;
+    }
+
+
+    .brand-text h1 {
+
+        font-size: 19px;
+    }
+
+
+    .brand-text p {
+
+        font-size: 11px;
+    }
+
+
+    .header-actions {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .header-actions button {
+
+        min-height: 42px;
+    }
+
+
+    .page-heading h2 {
+
+        font-size: 25px;
+    }
+
+
+    .summary-card {
+
+        padding: 14px;
+    }
+
+
+    .summary-icon {
+
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 20px;
+    }
+
+
+    .summary-content strong {
+
+        font-size: 18px;
+    }
+
+
+    .date-selector {
+
+        padding: 8px;
+    }
+
+
+    .date-nav-btn {
+
+        width: 40px;
+
+        height: 40px;
+    }
+
+}
+
+
+/* =========================================================
+   21. ACCESSIBILITY
+   ========================================================= */
+
+button:focus-visible,
+input:focus-visible {
+
+    outline: 3px solid rgba(194, 162, 77, 0.25);
+
+    outline-offset: 2px;
+}
+.card {
+  background: #212b1c;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+/* =========================================================
+   EDIT PRODUCT MODAL - MOBILE FORM FIX
+   ========================================================= */
+
+#editProductForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#editProductForm label {
+    display: block;
+    width: 100%;
+    margin: 0 0 7px 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#editProductForm input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 52px;
+    padding: 12px 14px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+/* Keep each field together */
+#editProductForm .form-group,
+#editProductForm .input-group,
+#editProductForm .field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Edit modal buttons */
+#editProductForm button {
+    min-height: 52px;
+    font-size: 16px;
+}
+
+/* Mobile spacing */
+@media (max-width: 600px) {
+
+    #editProductModal .modal-content {
+        width: calc(100% - 24px);
+        max-width: 100%;
+        padding: 24px 18px;
+        box-sizing: border-box;
+    }
+
+    #editProductForm {
+        gap: 14px;
+    }
+
+    #editProductForm label {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    #editProductForm input {
+        min-height: 52px;
+        font-size: 16px;
+    }
+
+}
+
+/* =========================================================
+   END OF bMANAGER STYLE
+   ========================================================= */

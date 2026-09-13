@@ -1,0 +1,26 @@
+{
+  "name": "bmanager-backend",
+  "version": "1.0.0",
+  "description": "Backend API for bManager business management system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "bmanager",
+    "business",
+    "inventory",
+    "management"
+  ],
+  "author": "bManager",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.2"
+  }
+}

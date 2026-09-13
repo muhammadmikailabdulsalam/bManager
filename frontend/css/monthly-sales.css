@@ -1,0 +1,256 @@
+/* =========================================================
+   bManager
+   Monthly Sales Report
+   ========================================================= */
+
+
+/* =========================================================
+   MONTH SELECTOR
+   ========================================================= */
+
+.sales-date-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 24px;
+
+    padding: 20px;
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 10px;
+
+}
+
+
+.sales-date-card label {
+
+    font-weight: 600;
+
+    color: #eef1e6;
+
+}
+
+
+.sales-date-card input {
+
+    min-width: 180px;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    border: 1px solid #3a4a30;
+
+    background: #161f13;
+
+    color: #eef1e6;
+
+    font-size: 15px;
+
+}
+
+
+.sales-date-card input:focus {
+
+    outline: none;
+
+    border-color: #c2a24d;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.monthly-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(220px, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.summary-card {
+
+    padding: 20px;
+
+    background: #212b1c;
+
+    border: 1px solid #3a4a30;
+
+    border-radius: 10px;
+
+}
+
+
+.summary-label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #aeb7a4;
+
+    font-size: 14px;
+
+}
+
+
+.summary-card strong {
+
+    color: #c2a24d;
+
+    font-size: 24px;
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.sales-empty {
+
+    text-align: center;
+
+    padding: 55px 20px;
+
+    color: #aeb7a4;
+
+}
+
+
+.sales-empty .empty-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.sales-empty h3 {
+
+    margin-bottom: 8px;
+
+    color: #eef1e6;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+#salesTable {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+#salesTable th,
+#salesTable td {
+
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #3a4a30;
+
+    border-right: 1px solid #3a4a30;
+
+}
+
+
+#salesTable th:last-child,
+#salesTable td:last-child {
+
+    border-right: none;
+
+}
+
+
+#salesTable th {
+
+    color: #c2a24d;
+
+    background: #212b1c;
+
+    font-weight: 700;
+
+}
+
+
+#salesTable td {
+
+    color: #eef1e6;
+
+}
+
+
+#salesTable tfoot td {
+
+    font-weight: 700;
+
+    color: #c2a24d;
+
+    background: #212b1c;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .sales-date-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .sales-date-card input {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .monthly-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .table-wrapper {
+
+        overflow-x: auto;
+
+    }
+
+}

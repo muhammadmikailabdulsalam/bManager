@@ -2087,11 +2087,15 @@ async function startServer() {
     await connectDatabase();
 
 
-    app.listen(
-        PORT,
-        () => {
+    // Only listen when running locally
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-            console.log("");
+// Export the app for Vercel
+module.exports = app;
 
             console.log(
                 "================================"

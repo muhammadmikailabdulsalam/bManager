@@ -49,31 +49,29 @@ MIDDLEWARE
  * Only the local bManager origins are allowed for cross-origin
  * requests; the API is not open to every website.
  */
-const allowedOrigins = new Set([
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]);
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://b-manager-livid.vercel.app",          // your frontend
+  "https://stpay1.vercel.app",                   // if you still use this
+  "https://bmanager-backend.vercel.app"
+];
 
 app.use(
-    cors({
-        origin(origin, callback) {
-            if (!origin || allowedOrigins.has(origin)) {
-                callback(null, true);
-                return;
-            }
-
-            callback(new Error("Origin not allowed by bManager CORS policy"));
-        }
-    })
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Origin not allowed by bManager CORS policy"));
+      }
+    },
+    credentials: true
+  })
 );
-
-app.use(express.json());
-
-const path = require("path");
-
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-
 /*
 ==================================================
 AUTH ROUTES

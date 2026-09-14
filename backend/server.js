@@ -2083,58 +2083,19 @@ START SERVER
 */
 
 async function startServer() {
+  await connectDatabase();
 
-    await connectDatabase();
-
-
-    // Only listen when running locally
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  // Only listen when running locally
+  if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`http://localhost:${PORT}`);
+    });
+  }
 }
+
+// Start the server (for local development)
+startServer();
 
 // Export the app for Vercel
 module.exports = app;
-
-            console.log(
-                "================================"
-            );
-
-            console.log(
-                "       bManager Backend"
-            );
-
-            console.log(
-                "================================"
-            );
-
-            console.log(
-                `Server running on port ${PORT}`
-            );
-
-            console.log(
-                `http://localhost:${PORT}`
-            );
-
-            console.log(
-                "Database: MongoDB Atlas ☁️"
-            );
-
-            console.log(
-                "Inventory storage: MongoDB ACTIVE 💾"
-            );
-
-            console.log(
-                "================================"
-            );
-
-            console.log("");
-
-        }
-    );
-
-}
-
-
-startServer();

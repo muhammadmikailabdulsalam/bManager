@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const connectDatabase =
     require("./config/database");
@@ -492,11 +493,30 @@ async function getMonthlySalesReport(requestedMonth) {
 
 /*
 ==================================================
-HOME ROUTE
+FRONTEND STATIC FILES
 ==================================================
+
+The frontend lives in a sibling folder (../frontend
+relative to this file), so it's served directly by
+this same Express server/service on Render.
 */
 
+app.use(express.static(path.join(__dirname, "..", "frontend")));
+
 app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
+});
+
+/*
+==================================================
+API STATUS CHECK
+==================================================
+
+Moved off "/" so it doesn't block the frontend.
+Visit /api/status to see this instead.
+*/
+
+app.get("/api/status", (req, res) => {
 
     res.json({
 

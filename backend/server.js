@@ -35,7 +35,7 @@ APP CONFIGURATION
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 /*
@@ -2083,13 +2083,9 @@ START SERVER
 async function startServer() {
   await connectDatabase();
 
-  // Only listen when running locally
-  if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-      console.log(`http://localhost:${PORT}`);
-    });
-  }
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 }
 
 // Start the server (for local development)

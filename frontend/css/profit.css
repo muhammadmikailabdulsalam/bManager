@@ -51,16 +51,26 @@ File: frontend/css/profit.css
 
 
 .profit-type-btn {
-    border: 1px solid #d0d0d0;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
     padding: 10px 18px;
-    background: #fff;
+    background: var(--surface);
+    color: var(--text-dim);
     font-weight: 600;
+    transition: background 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease);
+}
+
+
+.profit-type-btn:hover {
+    background: var(--surface-raised);
 }
 
 
 .profit-type-btn.active {
     font-weight: 700;
+    color: var(--accent-ink);
+    background: linear-gradient(135deg, #e6c777, var(--accent) 55%, var(--accent-dark));
+    border-color: transparent;
 }
 
 
@@ -74,17 +84,27 @@ File: frontend/css/profit.css
 .profit-period-control label {
     font-size: 14px;
     font-weight: 600;
+    color: var(--text-dim);
 }
 
 
 .profit-period-control input {
     min-width: 180px;
     padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-sm);
+    background: var(--surface-alt);
+    color: var(--text);
     font: inherit;
     box-sizing: border-box;
+    transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+
+.profit-period-control input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 
@@ -101,6 +121,8 @@ File: frontend/css/profit.css
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-md);
 }
 
 
@@ -108,25 +130,32 @@ File: frontend/css/profit.css
     width: 100%;
     min-width: 700px;
     border-collapse: collapse;
+    background: var(--surface);
 }
 
 
 .profit-container th,
 .profit-container td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border-soft);
     text-align: left;
     vertical-align: middle;
+    color: var(--text-dim);
 }
 
 
 .profit-container th {
     font-weight: 700;
+    color: var(--text-dim);
+    background: var(--surface-alt);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
 
-.profit-container tbody tr:hover {
-    background: rgba(0, 0, 0, 0.025);
+.profit-container tbody tr:hover td {
+    background: var(--surface-raised);
 }
 
 
@@ -145,20 +174,22 @@ File: frontend/css/profit.css
     width: 150px;
     max-width: 100%;
     padding: 10px 12px;
-    border: 1px solid #cfcfcf;
-    border-radius: 8px;
-    background: #fff;
-    color: inherit;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-sm);
+    background: var(--surface-alt);
+    color: var(--text);
     font: inherit;
     box-sizing: border-box;
     pointer-events: auto;
     touch-action: manipulation;
+    transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
 }
 
 
 .actual-value-input:focus {
-    outline: 2px solid rgba(0, 0, 0, 0.15);
-    outline-offset: 1px;
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 
@@ -191,26 +222,35 @@ File: frontend/css/profit.css
     display: grid;
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 16px;
     margin: 20px 0;
 }
 
 
 .summary-card {
-    padding: 18px;
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    background: #fff;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    background: var(--surface);
     box-sizing: border-box;
+    box-shadow: var(--shadow-sm);
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 
 .summary-card span {
     display: block;
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    opacity: 0.75;
+    color: var(--text-muted);
+    opacity: 1;
 }
 
 
@@ -218,12 +258,15 @@ File: frontend/css/profit.css
     display: block;
     font-size: 22px;
     line-height: 1.2;
+    color: var(--text);
 }
 
 
 .profit-total-row td {
     font-weight: 800;
-    border-top: 2px solid currentColor;
+    border-top: 2px solid var(--border);
+    color: var(--accent);
+    background: var(--surface-alt);
 }
 
 
@@ -233,11 +276,13 @@ File: frontend/css/profit.css
 
 .profit-positive {
     font-weight: 700;
+    color: var(--success);
 }
 
 
 .profit-negative {
     font-weight: 700;
+    color: var(--danger);
 }
 
 
@@ -249,22 +294,27 @@ File: frontend/css/profit.css
     z-index: 100;
     width: min(92%, 560px);
     padding: 14px 16px;
-    border-radius: 10px;
+    border-radius: var(--r-md);
     box-sizing: border-box;
-    background: #222;
-    color: #fff;
+    background: #0c1009;
+    border: 1px solid var(--border);
+    color: var(--text);
     text-align: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--shadow-lg);
 }
 
 
 .profit-message.success {
     font-weight: 600;
+    border-color: rgba(111, 191, 122, 0.35);
+    color: var(--success);
 }
 
 
 .profit-message.error {
     font-weight: 600;
+    border-color: rgba(229, 98, 107, 0.35);
+    color: var(--danger);
 }
 
 
@@ -318,32 +368,5 @@ File: frontend/css/profit.css
 
     .actual-value-input {
         width: 130px;
-    }
-}
-
-
-/* =====================================================
-   DARK MODE
-===================================================== */
-
-@media (prefers-color-scheme: dark) {
-
-    .profit-type-btn,
-    .profit-period-control input,
-    .actual-value-input,
-    .summary-card {
-        background: inherit;
-        color: inherit;
-    }
-
-
-    .profit-container th,
-    .profit-container td {
-        border-bottom-color: rgba(255,255,255,0.12);
-    }
-
-
-    .summary-card {
-        border-color: rgba(255,255,255,0.12);
     }
 }

@@ -325,174 +325,54 @@ async function getDailySalesReport(requestedDate) {
 
 async function getMonthlySalesReport(requestedMonth) {
 
-    const [year, month] = requestedMonth.split("-").map(Number);
-    const startDate = `${requestedMonth}-01`;
-    const nextMonth = new Date(Date.UTC(year, month, 1));
-    const endDate = nextMonth.toISOString().slice(0, 10);
+    // Monthly sales must always equal the sum of each day's
+    // sales in that month, so we reuse the exact same
+    // per-day calculation the Daily Sales page uses instead
+    // of a separate month-wide calculation. This keeps the
+    // two reports permanently consistent with each other.
+    const days = getDaysInMonth(requestedMonth);
 
-    const [monthlyRecords, previousRemaining] =
-        await Promise.all([
-            Inventory
-                .find({
-                    date: {
-                        $gte: startDate,
-                        $lt: endDate
-                    },
-                    type: {
-                        $in: ["new-order", "remaining"]
-                    }
-                })
-                .populate("product", "name price")
-                .sort({ date: 1, createdAt: 1 }),
-
-            Inventory
-                .find({
-                    date: { $lt: startDate },
-                    type: "remaining"
-                })
-                .populate("product", "name price")
-                .sort({ date: -1, createdAt: -1 })
-        ]);
-
-    const openingByProduct = {};
-
-    previousRemaining.forEach(item => {
-
-        if (!item.product) return;
-
-        const id = String(item.product._id);
-
-        if (openingByProduct[id] !== undefined) return;
-
-        openingByProduct[id] = Number(item.quantity || 0);
-    });
-
-    const byDate = {};
-
-    monthlyRecords.forEach(item => {
-
-        if (!item.product) return;
-
-        const date = item.date;
-        const id = String(item.product._id);
-
-        if (!byDate[date]) byDate[date] = {};
-
-        if (!byDate[date][id]) {
-            byDate[date][id] = {
-                productId: id,
-                product: item.product.name,
-                newOrder: 0,
-                closing: null,
-                price: Number(item.product.price || 0)
-            };
-        }
-
-        const record = byDate[date][id];
-        const quantity = Number(item.quantity || 0);
-        const price = Number(item.price || item.product.price || 0);
-
-        if (item.type === "new-order") {
-            record.newOrder += quantity;
-            record.price = price;
-        }
-
-        if (item.type === "remaining") {
-            record.closing =
-                (record.closing === null ? 0 : record.closing) +
-                quantity;
-
-            if (price > 0) record.price = price;
-        }
-    });
-
-    const previousClosing = { ...openingByProduct };
-    const sales = [];
-    const warnings = [];
-
-    for (const date of getDaysInMonth(requestedMonth)) {
-
-        const day = byDate[date];
-
-        if (!day) continue;
-
-        for (const id of Object.keys(day)) {
-
-            const item = day[id];
-
-            // A closing/remaining value is required to calculate
-            // that day's sales for this product.
-            if (item.closing === null) {
-                warnings.push(
-                    `${date}: ${item.product} has no remaining stock record.`
-                );
-                continue;
-            }
-
-            const opening = previousClosing[id] || 0;
-            const sold =
-                opening +
-                item.newOrder -
-                item.closing;
-
-            const quantitySold = Math.max(0, sold);
-
-            sales.push({
-                date,
-                productId: item.productId,
-                product: item.product,
-                opening,
-                newOrder: item.newOrder,
-                closing: item.closing,
-                quantitySold,
-                price: item.price,
-                total: quantitySold * item.price
-            });
-
-            previousClosing[id] = item.closing;
-        }
-    }
-
-    const totals = sales.reduce(
-        (result, item) => {
-            result.quantity += item.quantitySold;
-            result.value += item.total;
-            return result;
-        },
-        { quantity: 0, value: 0 }
+    const dailyReports = await Promise.all(
+        days.map(date => getDailySalesReport(date))
     );
 
-    // Aggregate the daily product rows into the format used by
-    // the existing Monthly Sales page.
     const products = {};
+    let totalQuantitySold = 0;
+    let totalSales = 0;
 
-    sales.forEach(item => {
+    dailyReports.forEach(report => {
 
-        const id = item.productId;
+        report.sales.forEach(item => {
 
-        if (!products[id]) {
-            products[id] = {
-                productId: id,
-                product: item.product,
-                quantitySold: 0,
-                total: 0,
-                price: item.price
-            };
-        }
+            const id = item.productId;
 
-        products[id].quantitySold += item.quantitySold;
-        products[id].total += item.total;
-        products[id].price = item.price;
+            if (!products[id]) {
+                products[id] = {
+                    productId: id,
+                    product: item.product,
+                    quantitySold: 0,
+                    total: 0,
+                    price: item.price
+                };
+            }
+
+            products[id].quantitySold += item.quantitySold;
+            products[id].total += item.total;
+            products[id].price = item.price;
+        });
+
+        totalQuantitySold += report.totalQuantity;
+        totalSales += report.totalValue;
     });
 
     return {
         success: true,
         month: requestedMonth,
         totalProducts: Object.keys(products).length,
-        totalQuantitySold: totals.quantity,
-        totalSales: totals.value,
+        totalQuantitySold,
+        totalSales,
         products: Object.values(products),
-        warnings
+        warnings: []
     };
 }
 

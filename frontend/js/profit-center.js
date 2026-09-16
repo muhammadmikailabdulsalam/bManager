@@ -3,13 +3,13 @@
    ========================================================= */
 
 const DAILY_SALES_API =
-    "http://localhost:3000/api/reports/daily-sales";
+    "/api/reports/daily-sales";
 
 const MONTHLY_SALES_API =
-    "http://localhost:3000/api/inventory/monthly";
+    "/api/inventory/monthly";
 
 const ACTUAL_VALUES_API =
-    "http://localhost:3000/api/profit/actual-values";
+    "/api/profit/actual-values";
 
 
 /* =========================================================

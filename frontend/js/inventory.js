@@ -8,7 +8,7 @@
    1. API CONFIGURATION
    ========================================================= */
 
-const API_URL = "http://localhost:3000/api/inventory";
+const API_URL = "/api/inventory";
 
 
 /* =========================================================
@@ -1210,7 +1210,7 @@ async function saveEditedProduct(event) {
 
     try {
         const response = await apiFetch(
-            `http://localhost:3000/api/products/${encodeURIComponent(id)}`,
+            `/api/products/${encodeURIComponent(id)}`,
             {
                 method:"PUT",
                 headers:{ "Content-Type":"application/json" },
@@ -1236,7 +1236,7 @@ async function deleteProduct() {
 
     try {
         const response = await apiFetch(
-            `http://localhost:3000/api/products/${encodeURIComponent(id)}`,
+            `/api/products/${encodeURIComponent(id)}`,
             { method:"DELETE" }
         );
         const data = await response.json();

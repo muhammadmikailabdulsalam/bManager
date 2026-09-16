@@ -74,6 +74,10 @@ app.use(
     credentials: true
   })
 );
+
+// Parse incoming JSON request bodies (required for req.body to work)
+app.use(express.json());
+
 /*
 ==================================================
 AUTH ROUTES

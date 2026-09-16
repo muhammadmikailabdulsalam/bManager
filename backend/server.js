@@ -55,7 +55,8 @@ const allowedOrigins = [
   "http://127.0.0.1:3000",
   "https://b-manager-livid.vercel.app",          // your frontend
   "https://stpay1.vercel.app",                   // if you still use this
-  "https://bmanager-backend.vercel.app"
+  "https://bmanager-backend.vercel.app",
+  "https://bmanager-ojes.onrender.com"           // live Render URL (frontend+backend)
 ];
 
 app.use(

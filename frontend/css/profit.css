@@ -1,42 +1,372 @@
-/* Profit Center – consistent with main design system */
-.page-title {
-    font-size: 22px;
-    font-weight: 750;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
+/*
+=========================================================
+bManager Profit Center
+File: frontend/css/profit.css
+=========================================================
+*/
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.profit-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
 }
-.page-subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 24px;
-}
-.filters-row {
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.profit-controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    align-items: flex-end;
-    margin-bottom: 20px;
+    align-items: end;
+    gap: 14px;
+    margin: 20px 0;
 }
-.profit-grid {
-    display: grid;
-    gap: 12px;
-}
-.profit-item {
-    background: var(--surface);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--r-lg);
-    padding: 16px 18px;
+
+
+.profit-type-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 8px;
+}
+
+
+.profit-type-btn,
+.profit-controls button,
+.profit-actions button,
+.profit-container button {
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+
+.profit-type-btn {
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 18px;
+    background: var(--surface);
+    color: var(--text-dim);
+    font-weight: 600;
+    transition: background 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease);
+}
+
+
+.profit-type-btn:hover {
+    background: var(--surface-raised);
+}
+
+
+.profit-type-btn.active {
+    font-weight: 700;
+    color: var(--accent-ink);
+    background: linear-gradient(135deg, #e6c777, var(--accent) 55%, var(--accent-dark));
+    border-color: transparent;
+}
+
+
+.profit-period-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.profit-period-control label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+
+
+.profit-period-control input {
+    min-width: 180px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-sm);
+    background: var(--surface-alt);
+    color: var(--text);
+    font: inherit;
+    box-sizing: border-box;
+    transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+
+.profit-period-control input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+
+/* =====================================================
+   GENERIC
+===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+.profit-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-md);
+}
+
+
+.profit-container table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    background: var(--surface);
+}
+
+
+.profit-container th,
+.profit-container td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    text-align: left;
+    vertical-align: middle;
+    color: var(--text-dim);
+}
+
+
+.profit-container th {
+    font-weight: 700;
+    color: var(--text-dim);
+    background: var(--surface-alt);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+
+.profit-container tbody tr:hover td {
+    background: var(--surface-raised);
+}
+
+
+/* =====================================================
+   STEP 1
+===================================================== */
+
+#actualValueStep {
+    margin-top: 18px;
+}
+
+
+.actual-value-input {
+    position: relative;
+    z-index: 10;
+    width: 150px;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-sm);
+    background: var(--surface-alt);
+    color: var(--text);
+    font: inherit;
+    box-sizing: border-box;
+    pointer-events: auto;
+    touch-action: manipulation;
+    transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+
+.actual-value-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+
+.profit-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+
+.primary-btn,
+.secondary-btn {
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+    touch-action: manipulation;
+}
+
+
+/* =====================================================
+   STEP 2
+===================================================== */
+
+#profitStep {
+    margin-top: 18px;
+}
+
+
+.summary-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
     gap: 16px;
+    margin: 20px 0;
 }
-.profit-item .name {
-    font-weight: 650;
+
+
+.summary-card {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    box-sizing: border-box;
+    box-shadow: var(--shadow-sm);
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
 }
-.profit-item input {
-    max-width: 120px;
-    text-align: right;
+
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
-.profit-positive { color: var(--success); }
-.profit-negative { color: var(--danger); }
+
+
+.summary-card span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+
+.summary-card strong {
+    display: block;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--text);
+}
+
+
+.profit-total-row td {
+    font-weight: 800;
+    border-top: 2px solid var(--border);
+    color: var(--accent);
+    background: var(--surface-alt);
+}
+
+
+/* =====================================================
+   PROFIT STATES
+===================================================== */
+
+.profit-positive {
+    font-weight: 700;
+    color: var(--success);
+}
+
+
+.profit-negative {
+    font-weight: 700;
+    color: var(--danger);
+}
+
+
+.profit-message {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: min(92%, 560px);
+    padding: 14px 16px;
+    border-radius: var(--r-md);
+    box-sizing: border-box;
+    background: #0c1009;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+
+.profit-message.success {
+    font-weight: 600;
+    border-color: rgba(111, 191, 122, 0.35);
+    color: var(--success);
+}
+
+
+.profit-message.error {
+    font-weight: 600;
+    border-color: rgba(229, 98, 107, 0.35);
+    color: var(--danger);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 760px) {
+
+    .profit-container {
+        padding: 14px;
+    }
+
+
+    .profit-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .profit-type-buttons {
+        width: 100%;
+    }
+
+
+    .profit-type-btn {
+        flex: 1;
+    }
+
+
+    .profit-period-control input {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .profit-actions {
+        justify-content: stretch;
+    }
+
+
+    .profit-actions button {
+        width: 100%;
+    }
+
+
+    .actual-value-input {
+        width: 130px;
+    }
+}

@@ -1,0 +1,160 @@
+/* =========================================================
+   bMANAGER NEON THEME
+   Visual-only theme layer.
+   Does not replace application logic or page structure.
+   ========================================================= */
+:root{
+  --neon-bg:#050713;
+  --neon-bg-2:#071329;
+  --neon-panel:rgba(7,14,32,.86);
+  --neon-panel-2:rgba(10,20,43,.78);
+  --neon-border:rgba(75,228,255,.26);
+  --neon-border-strong:rgba(75,228,255,.55);
+  --neon-cyan:#50efff;
+  --neon-cyan-2:#0db9df;
+  --neon-pink:#ff3f83;
+  --neon-gold:#ffd34a;
+  --neon-text:#eefcff;
+  --neon-muted:#9db2c9;
+  --neon-dim:#71859f;
+  --neon-danger:#ff5577;
+  --neon-success:#59e6a3;
+  --neon-radius:18px;
+  --neon-shadow:0 18px 50px rgba(0,0,0,.38),inset 0 0 35px rgba(55,220,255,.025);
+  --neon-glow:0 0 24px rgba(50,229,255,.14);
+  --neon-ease:cubic-bezier(.2,.8,.2,1);
+}
+
+html{background:var(--neon-bg);scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(900px 480px at 50% -18%,rgba(38,215,255,.13),transparent 62%),
+    radial-gradient(700px 420px at 100% 20%,rgba(255,63,131,.07),transparent 60%),
+    linear-gradient(180deg,#030611 0%,#050713 48%,#070b18 100%) !important;
+  color:var(--neon-text) !important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif !important;
+}
+
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background-image:linear-gradient(rgba(90,230,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(90,230,255,.018) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 90%);
+}
+
+.top-bar{
+  min-height:72px !important;padding:12px 22px !important;
+  background:rgba(4,9,23,.76) !important;
+  border-bottom:1px solid var(--neon-border) !important;
+  box-shadow:0 10px 35px rgba(0,0,0,.22),0 1px 0 rgba(75,228,255,.05) inset !important;
+  backdrop-filter:blur(16px) !important;-webkit-backdrop-filter:blur(16px);
+}
+.brand{gap:12px !important}
+.brand-logo{border-radius:13px !important;box-shadow:0 0 20px rgba(70,235,255,.16) !important;border:1px solid rgba(255,255,255,.08)}
+.brand-text h1{font-weight:900 !important;letter-spacing:-.8px !important;background:linear-gradient(90deg,#f3fdff 20%,#50efff 72%,#ff3f83) !important;-webkit-background-clip:text !important;background-clip:text !important;color:transparent !important}
+.brand-text p{color:var(--neon-muted) !important}
+
+.primary-btn,.secondary-btn,.cancel-btn,.login-btn,.profit-type-btn,.date-nav-btn{
+  border-radius:14px !important;transition:transform .16s var(--neon-ease),box-shadow .16s var(--neon-ease),border-color .16s var(--neon-ease),background .16s var(--neon-ease) !important;
+}
+.primary-btn,.login-btn{
+  color:#021018 !important;border:0 !important;
+  background:linear-gradient(100deg,#50efff,#d8fcff 55%,#50efff) !important;
+  box-shadow:0 0 24px rgba(80,239,255,.18),0 10px 25px rgba(0,0,0,.22) !important;
+}
+.primary-btn:hover,.login-btn:hover{transform:translateY(-2px) !important;box-shadow:0 0 34px rgba(80,239,255,.27),0 14px 30px rgba(0,0,0,.28) !important}
+.secondary-btn,.cancel-btn,.date-nav-btn,.profit-type-btn{
+  background:rgba(9,20,40,.72) !important;color:#ccecf6 !important;border:1px solid var(--neon-border) !important;
+}
+.secondary-btn:hover,.cancel-btn:hover,.date-nav-btn:hover,.profit-type-btn:hover{background:rgba(16,35,63,.9) !important;border-color:var(--neon-border-strong) !important;color:#fff !important;box-shadow:0 0 20px rgba(80,239,255,.1) !important;transform:translateY(-1px)}
+button:active{transform:scale(.97)}
+
+.inventory-container,.profit-container{max-width:1200px !important;padding-top:30px !important}
+.page-heading{margin-bottom:24px !important}
+.page-heading h2,.dashboard-heading h2{font-weight:900 !important;letter-spacing:-1px !important;text-shadow:0 0 22px rgba(80,239,255,.1)}
+.page-heading p,.dashboard-heading p{color:var(--neon-muted) !important}
+
+.date-selector,.sales-date-card,.summary-card,.inventory-section,.info-box,.search-box,.monthly-summary,.profit-period-control,.profit-controls{
+  background:linear-gradient(145deg,rgba(9,19,40,.88),rgba(4,10,24,.82)) !important;
+  border:1px solid var(--neon-border) !important;border-radius:var(--neon-radius) !important;
+  box-shadow:var(--neon-shadow) !important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.summary-card{position:relative;overflow:hidden}
+.summary-card::after{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--neon-cyan),transparent);opacity:.7}
+.summary-card:hover{transform:translateY(-4px) !important;border-color:rgba(80,239,255,.42) !important;box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 28px rgba(80,239,255,.08) !important}
+.summary-icon,.dashboard-card-icon{background:rgba(17,37,62,.78) !important;border:1px solid rgba(80,239,255,.15);box-shadow:inset 0 0 20px rgba(80,239,255,.04),0 0 18px rgba(80,239,255,.05)}
+.summary-content span,.selected-date span,.date-display span,.sales-date-card label{color:var(--neon-muted) !important}
+.summary-content strong{color:#f1fdff !important}
+
+input,select,textarea{
+  background:rgba(4,12,27,.88) !important;color:#effcff !important;border:1px solid rgba(102,166,195,.24) !important;border-radius:12px !important;
+  outline:none !important;box-shadow:inset 0 0 15px rgba(0,0,0,.12) !important;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--neon-cyan) !important;box-shadow:0 0 0 3px rgba(80,239,255,.1),0 0 20px rgba(80,239,255,.07) !important}
+input::placeholder,textarea::placeholder{color:#61758d !important}
+
+.table-wrapper{border:1px solid var(--neon-border) !important;border-radius:16px !important;background:rgba(3,9,21,.55) !important;box-shadow:var(--neon-shadow) !important}
+table{background:transparent !important;color:var(--neon-text) !important}
+th{background:rgba(9,23,44,.94) !important;color:#a9c5d8 !important;border-bottom:1px solid var(--neon-border) !important}
+td{border-color:rgba(90,170,200,.1) !important}
+tbody tr:hover{background:rgba(55,218,255,.035) !important}
+
+.section-header{border-bottom-color:rgba(80,239,255,.12) !important}
+.section-header h3{color:#eafcff !important}
+.empty-state,.sales-empty{color:var(--neon-muted) !important}
+.empty-icon{filter:drop-shadow(0 0 12px rgba(80,239,255,.18))}
+
+.dashboard-container{max-width:920px !important;padding:34px 0 60px !important}
+.dashboard-card{
+  width:100% !important;margin:12px 0 !important;padding:18px !important;
+  display:flex !important;align-items:center !important;gap:16px !important;text-align:left !important;
+  border:1px solid var(--neon-border) !important;border-radius:20px !important;
+  background:linear-gradient(145deg,rgba(9,19,40,.88),rgba(4,10,24,.82)) !important;
+  color:var(--neon-text) !important;box-shadow:var(--neon-shadow) !important;
+  position:relative;overflow:hidden;transition:transform .2s var(--neon-ease),border-color .2s,box-shadow .2s !important;
+}
+.dashboard-card::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(80,239,255,.06),transparent 45%,rgba(255,63,131,.035));opacity:0;transition:opacity .2s}
+.dashboard-card:hover{transform:translateY(-4px) !important;border-color:rgba(80,239,255,.45) !important;box-shadow:0 22px 50px rgba(0,0,0,.4),0 0 30px rgba(80,239,255,.09) !important}
+.dashboard-card:hover::before{opacity:1}
+.dashboard-card-content{position:relative;z-index:1}
+.dashboard-card-content h3{color:#f0fdff !important;font-weight:850 !important}
+.dashboard-card-content p{color:var(--neon-muted) !important}
+.dashboard-card-arrow{color:var(--neon-cyan) !important;font-size:25px !important;text-shadow:0 0 14px rgba(80,239,255,.55)}
+
+.modal-overlay{background:rgba(1,4,12,.74) !important;backdrop-filter:blur(8px)}
+.modal-box{background:linear-gradient(145deg,#09152c,#040a18) !important;border:1px solid var(--neon-border) !important;border-radius:22px !important;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 30px rgba(80,239,255,.08) !important}
+.modal-header{border-bottom-color:rgba(80,239,255,.12) !important}
+.close-btn{color:#a9c5d8 !important}.close-btn:hover{color:#fff !important}
+
+.profit-type-btn.active{color:#021018 !important;background:linear-gradient(100deg,#50efff,#d8fcff 55%,#50efff) !important;border-color:transparent !important;box-shadow:0 0 20px rgba(80,239,255,.18) !important}
+
+/* AUTH PAGES */
+.login-container{max-width:430px !important;padding:20px !important}
+.login-card{background:linear-gradient(145deg,rgba(8,18,39,.94),rgba(3,8,20,.91)) !important;border:1px solid var(--neon-border) !important;border-radius:26px !important;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 35px rgba(80,239,255,.08) !important;backdrop-filter:blur(16px)}
+.logo h1{font-weight:900 !important;letter-spacing:-1px !important;background:linear-gradient(90deg,#f3fdff 20%,#50efff 65%,#ff3f83) !important;-webkit-background-clip:text !important;background-clip:text !important;color:transparent !important}
+.logo p,.footer-text,.auth-switch{color:var(--neon-muted) !important}
+.auth-logo{filter:drop-shadow(0 0 20px rgba(80,239,255,.15))}
+.form-group label{color:#b8cadb !important}
+.login-btn{border-radius:14px !important;font-weight:900 !important}
+.password-toggle{background:transparent !important;color:#8ca7bd !important}
+.password-wrapper input{padding-right:48px !important}
+.divider{color:#6f849c !important}.divider::before,.divider::after{background:rgba(80,239,255,.12) !important}
+.google-button-container{filter:saturate(.9)}
+.auth-switch a{color:var(--neon-cyan) !important;text-shadow:0 0 10px rgba(80,239,255,.18)}
+.message{border-radius:12px !important}
+
+@media(max-width:700px){
+  .top-bar{padding:10px 14px !important}
+  .brand-logo{width:40px !important;height:40px !important}
+  .brand-text h1{font-size:19px !important}
+  .brand-text p{font-size:10px !important}
+  .inventory-container,.profit-container{width:calc(100% - 24px) !important;padding-top:22px !important}
+  .page-heading{align-items:flex-start !important;flex-direction:column !important;gap:10px !important}
+  .page-heading h2,.dashboard-heading h2{font-size:26px !important}
+  .summary-grid{grid-template-columns:1fr !important;gap:10px !important}
+  .sales-date-card,.profit-controls{align-items:stretch !important;flex-direction:column !important}
+  .sales-date-card input{width:100% !important}
+  .dashboard-container{width:calc(100% - 24px) !important;padding-top:24px !important}
+  .dashboard-card{padding:15px !important;border-radius:17px !important}
+  .dashboard-card-icon{width:44px !important;height:44px !important;flex:0 0 44px !important}
+}

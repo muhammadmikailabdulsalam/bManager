@@ -26,8 +26,24 @@ function logout() {
 
 // Protect page
 function requireLogin() {
-    if (!getToken()) {
-        window.location.href = "login.html";
+    const token = getToken();
+
+    if (!token) {
+        window.location.replace("login.html");
+        return false;
+    }
+
+    try {
+        const payload = JSON.parse(
+            atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+        );
+
+        if (payload.exp && payload.exp * 1000 <= Date.now()) {
+            logout();
+            return false;
+        }
+    } catch (error) {
+        logout();
         return false;
     }
 

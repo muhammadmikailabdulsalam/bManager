@@ -158,3 +158,42 @@ tbody tr:hover{background:rgba(55,218,255,.035) !important}
   .dashboard-card{padding:15px !important;border-radius:17px !important}
   .dashboard-card-icon{width:44px !important;height:44px !important;flex:0 0 44px !important}
 }
+
+
+/* =========================================================
+   PROFESSIONAL DASHBOARD
+   Presentation-only styles. Dashboard navigation remains
+   the same and points to the existing pages.
+   ========================================================= */
+html.auth-pending body{visibility:hidden}
+.dashboard-top-bar{position:sticky;top:0;z-index:20}
+.dashboard-header-actions{display:flex;align-items:center;gap:10px}
+.session-user{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:9px 12px;border:1px solid rgba(80,239,255,.12);border-radius:12px;background:rgba(8,18,36,.55);color:#a9c3d6;font-size:12px;font-weight:700}
+
+.professional-dashboard{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:34px 0 54px}
+.dashboard-hero{position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:space-between;gap:28px;padding:34px;border:1px solid rgba(80,239,255,.18);border-radius:26px;background:linear-gradient(135deg,rgba(10,25,51,.92),rgba(5,11,26,.88));box-shadow:0 25px 70px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.035)}
+.dashboard-hero::after{content:"";position:absolute;width:360px;height:360px;right:-160px;top:-210px;border-radius:50%;background:radial-gradient(circle,rgba(80,239,255,.16),transparent 68%);pointer-events:none}
+.dashboard-hero-copy{position:relative;z-index:1;max-width:720px}
+.dashboard-eyebrow,.section-kicker{display:block;color:#50efff;font-size:10px;font-weight:900;letter-spacing:1.8px}
+.dashboard-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#59e6a3;box-shadow:0 0 12px rgba(89,230,163,.7)}
+.dashboard-hero h2{margin:0;font-size:clamp(31px,5vw,48px);line-height:1.04;letter-spacing:-1.8px;font-weight:900;color:#f1fbff}
+.dashboard-hero p{max-width:650px;margin:14px 0 0;color:#9db2c9;font-size:15px;line-height:1.65}
+.dashboard-hero-badge{position:relative;z-index:1;min-width:145px;padding:13px 15px;border:1px solid rgba(89,230,163,.22);border-radius:15px;background:rgba(4,16,25,.55);text-align:right}
+.dashboard-hero-badge span{display:block;color:#59e6a3;font-size:9px;font-weight:900;letter-spacing:1.5px}.dashboard-hero-badge strong{display:block;margin-top:4px;color:#d8e9ee;font-size:10px;letter-spacing:.7px}
+
+.dashboard-section{margin-top:36px}.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:15px}.section-heading h3{margin:4px 0 0;color:#effaff;font-size:21px;font-weight:850;letter-spacing:-.4px}.section-heading>p{margin:0;color:#71859f;font-size:12px}
+.dashboard-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.dashboard-module-card{position:relative;min-height:150px;display:flex;align-items:flex-start;gap:16px;padding:21px;text-decoration:none;color:inherit;border:1px solid rgba(80,239,255,.15);border-radius:20px;background:linear-gradient(145deg,rgba(10,23,47,.86),rgba(5,12,27,.82));box-shadow:0 14px 34px rgba(0,0,0,.22);transition:transform .18s var(--neon-ease),border-color .18s var(--neon-ease),box-shadow .18s var(--neon-ease)}
+.dashboard-module-card::before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:2px;border-radius:3px;background:#50efff;box-shadow:0 0 14px rgba(80,239,255,.5);opacity:.7}
+.dashboard-module-card:hover{transform:translateY(-4px);border-color:rgba(80,239,255,.38);box-shadow:0 22px 45px rgba(0,0,0,.34),0 0 25px rgba(80,239,255,.07)}
+.dashboard-module-card:active{transform:translateY(-1px) scale(.99)}
+.module-icon{width:48px;height:48px;display:grid;place-items:center;flex:0 0 48px;border-radius:14px;color:#50efff;background:rgba(80,239,255,.08);border:1px solid rgba(80,239,255,.16);font-size:21px;font-weight:900}
+.module-copy{min-width:0;padding-right:20px}.module-label{color:#71859f;font-size:9px;font-weight:900;letter-spacing:1.4px}.module-copy h4{margin:5px 0 5px;color:#f1fbff;font-size:18px;font-weight:850}.module-copy p{margin:0;color:#8fa5ba;font-size:12px;line-height:1.55}.module-arrow{position:absolute;right:18px;top:18px;color:#50efff;font-size:20px;font-weight:700;opacity:.65;transition:transform .18s ease,opacity .18s ease}.dashboard-module-card:hover .module-arrow{transform:translate(2px,-2px);opacity:1}
+.sales-module::before{background:#ff3f83;box-shadow:0 0 14px rgba(255,63,131,.45)}.sales-module .module-icon{color:#ff79a7;background:rgba(255,63,131,.08);border-color:rgba(255,63,131,.17)}.monthly-module::before{background:#ffd34a;box-shadow:0 0 14px rgba(255,211,74,.4)}.monthly-module .module-icon{color:#ffd34a;background:rgba(255,211,74,.07);border-color:rgba(255,211,74,.15)}.profit-module::before{background:#59e6a3;box-shadow:0 0 14px rgba(89,230,163,.4)}.profit-module .module-icon{color:#59e6a3;background:rgba(89,230,163,.07);border-color:rgba(89,230,163,.15)}
+
+.workspace-section{margin-top:42px}.dashboard-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.dashboard-info-card{display:flex;gap:13px;padding:18px;border:1px solid rgba(80,239,255,.1);border-radius:17px;background:rgba(7,16,33,.62)}.info-card-icon{width:35px;height:35px;display:grid;place-items:center;flex:0 0 35px;border-radius:10px;color:#50efff;background:rgba(80,239,255,.06);font-size:10px;font-weight:900}.dashboard-info-card h4{margin:1px 0 5px;color:#dcecf3;font-size:14px}.dashboard-info-card p{margin:0;color:#71859f;font-size:11px;line-height:1.55}
+.dashboard-footer{margin-top:10px}
+
+@media(max-width:800px){.professional-dashboard{width:calc(100% - 24px);padding-top:22px}.dashboard-hero{align-items:flex-start;flex-direction:column;padding:25px 20px}.dashboard-hero-badge{align-self:stretch;text-align:left}.dashboard-module-grid{grid-template-columns:1fr}.dashboard-info-grid{grid-template-columns:1fr}.session-user{display:none}}
+@media(max-width:480px){.dashboard-hero h2{font-size:30px;letter-spacing:-1px}.dashboard-hero p{font-size:13px}.dashboard-section{margin-top:28px}.section-heading{align-items:flex-start;flex-direction:column;gap:4px}.dashboard-module-card{min-height:130px;padding:18px}.module-icon{width:43px;height:43px;flex-basis:43px}.module-copy h4{font-size:16px}}

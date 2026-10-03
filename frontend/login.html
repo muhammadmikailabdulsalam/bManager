@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script>
+        (function () {
+            try {
+                const token = localStorage.getItem("bmanager_token");
+                if (!token) return;
+
+                const payload = JSON.parse(
+                    atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+                );
+
+                if (!payload.exp || payload.exp * 1000 > Date.now()) {
+                    window.location.replace("index.html");
+                }
+            } catch (error) {
+                localStorage.removeItem("bmanager_token");
+                localStorage.removeItem("bmanager_user");
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bManager - Login</title>

@@ -1,438 +1,211 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="auth-pending">
 
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050713">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>bManager — Business Dashboard</title>
 
-    <title>bManager</title>
+    <!-- Prevent the dashboard from flashing before authentication is checked. -->
+    <script>
+        (function () {
+            try {
+                const token = localStorage.getItem("bmanager_token");
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+                if (!token) {
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                // JWT payload is readable client-side only to check expiry.
+                // The backend remains the authority for actual authentication.
+                const payload = JSON.parse(
+                    atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+                );
+
+                if (payload.exp && payload.exp * 1000 <= Date.now()) {
+                    localStorage.removeItem("bmanager_token");
+                    localStorage.removeItem("bmanager_user");
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                document.documentElement.classList.remove("auth-pending");
+            } catch (error) {
+                localStorage.removeItem("bmanager_token");
+                localStorage.removeItem("bmanager_user");
+                window.location.replace("login.html");
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/neon-theme.css">
 
 </head>
-
 
 <body>
 
     <!-- =========================================
-         bManager HEADER
+         bMANAGER HEADER
          ========================================= -->
-
-    <header class="top-bar">
+    <header class="top-bar dashboard-top-bar">
 
         <div class="brand">
-
-            <img
-                src="assets/logo.png"
-                alt="bManager logo"
-                class="brand-logo"
-            >
+            <img src="assets/logo.png" alt="bManager logo" class="brand-logo">
 
             <div class="brand-text">
-
                 <h1>bManager</h1>
-
                 <p>Business Management</p>
-
             </div>
-
         </div>
 
-        <div class="header-actions">
-            <button
-                type="button"
-                class="secondary-btn"
-                id="logoutBtn"
-            >
-                Logout
-            </button>
+        <div class="header-actions dashboard-header-actions">
+            <div class="session-user" id="currentUser">Account</div>
+            <button type="button" class="secondary-btn" id="logoutBtn">Logout</button>
         </div>
 
     </header>
 
 
     <!-- =========================================
-         DASHBOARD
+         PROFESSIONAL DASHBOARD
          ========================================= -->
+    <main class="professional-dashboard">
 
-    <main class="dashboard-container">
+        <section class="dashboard-hero">
+            <div class="dashboard-hero-copy">
+                <div class="dashboard-eyebrow">
+                    <span class="status-dot"></span>
+                    BUSINESS CONTROL CENTER
+                </div>
 
-        <section class="dashboard-heading">
+                <h2>Run your business with clarity.</h2>
 
-            <h2>Welcome to bManager</h2>
+                <p>
+                    Manage inventory, monitor sales, and review profit from one focused workspace.
+                </p>
+            </div>
 
-            <p>
-                Manage your inventory and view your
-                business reports from one place.
-            </p>
-
+            <div class="dashboard-hero-badge">
+                <span>SECURE</span>
+                <strong>SESSION ACTIVE</strong>
+            </div>
         </section>
 
 
         <!-- =====================================
-             DAILY INVENTORY
+             QUICK ACTIONS
              ===================================== -->
-
-        <button
-            type="button"
-            class="dashboard-card"
-            onclick="location.href='inventory.html'"
-        >
-
-            <div class="dashboard-card-icon">
-                📦
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">QUICK ACCESS</span>
+                    <h3>Business tools</h3>
+                </div>
+                <p>Choose where you want to work.</p>
             </div>
 
-            <div class="dashboard-card-content">
+            <div class="dashboard-module-grid">
 
-                <h3>Daily Inventory</h3>
+                <a class="dashboard-module-card inventory-module" href="inventory.html">
+                    <div class="module-icon">📦</div>
+                    <div class="module-copy">
+                        <span class="module-label">OPERATIONS</span>
+                        <h4>Daily Inventory</h4>
+                        <p>Record new orders and remaining stock.</p>
+                    </div>
+                    <span class="module-arrow">↗</span>
+                </a>
 
-                <p>
-                    Manage today's products,
-                    new orders and remaining stock.
-                </p>
+                <a class="dashboard-module-card sales-module" href="daily-sales.html">
+                    <div class="module-icon">▥</div>
+                    <div class="module-copy">
+                        <span class="module-label">PERFORMANCE</span>
+                        <h4>Daily Sales</h4>
+                        <p>Review sales performance by date.</p>
+                    </div>
+                    <span class="module-arrow">↗</span>
+                </a>
+
+                <a class="dashboard-module-card monthly-module" href="monthly-sales.html">
+                    <div class="module-icon">◫</div>
+                    <div class="module-copy">
+                        <span class="module-label">ANALYTICS</span>
+                        <h4>Monthly Sales</h4>
+                        <p>Understand your monthly sales activity.</p>
+                    </div>
+                    <span class="module-arrow">↗</span>
+                </a>
+
+                <a class="dashboard-module-card profit-module" href="profit.html">
+                    <div class="module-icon">₦</div>
+                    <div class="module-copy">
+                        <span class="module-label">FINANCE</span>
+                        <h4>Profit Center</h4>
+                        <p>Review daily and monthly profit reports.</p>
+                    </div>
+                    <span class="module-arrow">↗</span>
+                </a>
 
             </div>
-
-            <div class="dashboard-card-arrow">
-                →
-            </div>
-
-        </button>
+        </section>
 
 
         <!-- =====================================
-             DAILY SALES
+             WORKSPACE OVERVIEW
              ===================================== -->
-
-        <button
-            type="button"
-            class="dashboard-card"
-            onclick="location.href='daily-sales.html'"
-        >
-
-            <div class="dashboard-card-icon">
-                📊
+        <section class="dashboard-section workspace-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">WORKSPACE</span>
+                    <h3>Everything in one place</h3>
+                </div>
             </div>
 
-            <div class="dashboard-card-content">
+            <div class="dashboard-info-grid">
+                <article class="dashboard-info-card">
+                    <div class="info-card-icon">01</div>
+                    <div>
+                        <h4>Track inventory</h4>
+                        <p>Keep daily stock movement organized and easy to review.</p>
+                    </div>
+                </article>
 
-                <h3>Daily Sales</h3>
+                <article class="dashboard-info-card">
+                    <div class="info-card-icon">02</div>
+                    <div>
+                        <h4>Measure sales</h4>
+                        <p>Move from daily records to monthly business reporting.</p>
+                    </div>
+                </article>
 
-                <p>
-                    Select a date and view the
-                    daily sales report.
-                </p>
-
+                <article class="dashboard-info-card">
+                    <div class="info-card-icon">03</div>
+                    <div>
+                        <h4>Understand profit</h4>
+                        <p>Use the profit center to review the financial side of your business.</p>
+                    </div>
+                </article>
             </div>
-
-            <div class="dashboard-card-arrow">
-                →
-            </div>
-
-        </button>
-
-
-        <!-- =====================================
-             MONTHLY SALES
-             ===================================== -->
-
-        <button
-            type="button"
-            class="dashboard-card"
-            onclick="location.href='monthly-sales.html'"
-        >
-
-            <div class="dashboard-card-icon">
-                📅
-            </div>
-
-            <div class="dashboard-card-content">
-
-                <h3>Monthly Sales</h3>
-
-                <p>
-                    Select a month and view the
-                    monthly sales report.
-                </p>
-
-            </div>
-
-            <div class="dashboard-card-arrow">
-                →
-            </div>
-
-        </button>
+        </section>
 
     </main>
 
-        <!-- =====================================
-             PROFIT CENTER
-             ===================================== -->
 
-        <button
-            type="button"
-            class="dashboard-card"
-            onclick="location.href='profit.html'"
-        >
+    <footer class="footer dashboard-footer">
+        <div class="footer-brand">
+            <img src="assets/logo.png" alt="bManager">
+            <span>bManager</span>
+        </div>
+        <p>Smart Business Management</p>
+        <p class="copyright">© 2026 bManager. All rights reserved.</p>
+    </footer>
 
-            <div class="dashboard-card-icon">
-                💰
-            </div>
+    <script src="js/app.js"></script>
 
-            <div class="dashboard-card-content">
-
-                <h3>Profit Center</h3>
-
-                <p>
-                    Enter product unit costs and
-                    view your daily and monthly profit.
-                </p>
-
-            </div>
-
-            <div class="dashboard-card-arrow">
-                →
-            </div>
-
-        </button>
-    <!-- =========================================
-         DASHBOARD STYLES
-         ========================================= -->
-
-    <style>
-
-        .dashboard-container {
-
-            width:
-                min(
-                    900px,
-                    calc(100% - 32px)
-                );
-
-            margin: 0 auto;
-
-            padding:
-                40px 0 60px;
-
-        }
-
-
-        .dashboard-heading {
-
-            margin-bottom: 28px;
-
-        }
-
-
-        .dashboard-heading h2 {
-
-            font-size: 32px;
-
-            line-height: 1.15;
-
-            font-weight: 800;
-
-            letter-spacing: -0.8px;
-
-        }
-
-
-        .dashboard-heading p {
-
-            color: #8b9c78;
-
-            margin-top: 8px;
-
-            max-width: 600px;
-
-        }
-
-
-        .dashboard-card {
-
-            width: 100%;
-
-            border:
-                1px solid #3a4a30;
-
-            border-radius: 18px;
-
-            background: #212b1c;
-
-            color: #eef1e6;
-
-            padding: 22px;
-
-            margin-bottom: 16px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-
-            text-align: left;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 4px 14px
-                rgba(0, 0, 0, 0.30);
-
-            transition:
-                transform 0.15s ease,
-                border-color 0.15s ease,
-                box-shadow 0.15s ease;
-
-        }
-
-
-        .dashboard-card:hover {
-
-            transform:
-                translateY(-2px);
-
-            border-color:
-                #c2a24d;
-
-            box-shadow:
-                0 8px 22px
-                rgba(0, 0, 0, 0.42);
-
-        }
-
-
-        .dashboard-card:active {
-
-            transform:
-                scale(0.98);
-
-        }
-
-
-        .dashboard-card-icon {
-
-            width: 56px;
-
-            height: 56px;
-
-            border-radius: 14px;
-
-            background: #2c3924;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 27px;
-
-            flex-shrink: 0;
-
-        }
-
-
-        .dashboard-card-content {
-
-            flex: 1;
-
-            min-width: 0;
-
-        }
-
-
-        .dashboard-card-content h3 {
-
-            font-size: 19px;
-
-            font-weight: 800;
-
-        }
-
-
-        .dashboard-card-content p {
-
-            color: #8b9c78;
-
-            font-size: 13px;
-
-            margin-top: 4px;
-
-        }
-
-
-        .dashboard-card-arrow {
-
-            color: #c2a24d;
-
-            font-size: 25px;
-
-            font-weight: 800;
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .dashboard-container {
-
-                padding-top: 30px;
-
-            }
-
-
-            .dashboard-heading h2 {
-
-                font-size: 27px;
-
-            }
-
-
-            .dashboard-card {
-
-                padding: 18px;
-
-                gap: 14px;
-
-            }
-
-
-            .dashboard-card-icon {
-
-                width: 50px;
-
-                height: 50px;
-
-                font-size: 24px;
-
-            }
-
-
-            .dashboard-card-content h3 {
-
-                font-size: 17px;
-
-            }
-
-        }
-
-    </style>
-
-
-<script src="js/app.js"></script>
-
-    <link rel="stylesheet" href="css/neon-theme.css">
 </body>
-
 </html>
